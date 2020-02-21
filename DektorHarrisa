@@ -1,0 +1,4 @@
+    doGauss();
+    doSobel(maskSobel);
+    doSobel(maskSobel2);
+    doGauss();
