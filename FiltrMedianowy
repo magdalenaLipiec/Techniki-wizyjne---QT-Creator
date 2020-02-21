@@ -1,0 +1,51 @@
+void Control::doMediana() {
+
+    int licznik = 30;
+    int cor[256];
+    int suma;
+    int copyMatrix[100][100];
+    int a[ 3 ][3];
+    ////////////////////////////////////////////////////////////////
+    int mask[3][3] = {{1,2,1}, {2,4,2}, {1,2,1}};
+    //int mask[3][3] = {{1,1,1}, {1,1,1}, {1,1,1}};
+    //int mask[3][3] = {{-1,-1,-1}, {-1,9,-1}, {-1,-1,-1}};          //usun srednia
+    //int mask[3][3] = {{0,-1,0}, {0,2,0}, {0,-1,0}};         //laplace poziomy
+    //int mask[3][3] = {{-1,0,1}, {-1,0,1}, {-1,0,1}};          //prewitt Fx
+    //int mask[3][3] = {{-1,-1,-1}, {0,0,0}, {1,1,1}};      //prewit Fy
+
+        for(int i = 0; i < 100; i++) {
+        for(int j = 0; j < 100; j++) {
+
+        copyMatrix[i][j] = imgMatrix[i][j];
+
+                }
+                }
+
+        for(int i = 1; i < 99; i++) {
+        for(int j = 1; j < 99; j++) {
+
+           // a[i][j] = {{ mask[0][0]*copyMatrix[i-1][j-1], mask[0][1]*copyMatrix[i][j-1] ,  mask[0][2]*copyMatrix[i+1][j-1]} ,{ mask[1][0]*copyMatrix[i-1][j], mask[1][1]*copyMatrix[i][j], mask[1][2]*copyMatrix[i+1][j]},{ mask[2][0]*copyMatrix[i-1][j+1], mask[2][1]*copyMatrix[i][j+1], mask[2][2]*copyMatrix[i+1][j+1] }};
+    int b[9] = { mask[0][0]*copyMatrix[i-1][j-1], mask[0][1]*copyMatrix[i][j-1] ,  mask[0][2]*copyMatrix[i+1][j-1] , mask[1][0]*copyMatrix[i-1][j], mask[1][1]*copyMatrix[i][j], mask[1][2]*copyMatrix[i+1][j], mask[2][0]*copyMatrix[i-1][j+1], mask[2][1]*copyMatrix[i][j+1], mask[2][2]*copyMatrix[i+1][j+1] };
+            //sort
+                for(int i=1; i<9; i++)
+                {
+                    for(int j=9-1; j>=1; j--)
+                    {
+                        if(b[j]<b[j-1])
+                        {
+                            int bufor;
+                            bufor = b[j-1];
+                            b[j-1]=b[j];
+                            b[j]=bufor;
+                        }
+                    }
+                }
+
+                imgMatrix[i][j] = b[5];
+
+                               }
+                               }
+
+//suma = mask[0][0]*copyMatrix[i-1][j-1] + mask[0][1]*copyMatrix[i][j-1] +  mask[0][2]*copyMatrix[i+1][j-1] + mask[1][0]*copyMatrix[i-1][j]+ mask[1][1]*copyMatrix[i][j]+ mask[1][2]*copyMatrix[i+1][j]+ mask[2][0]*copyMatrix[i-1][j+1]+ mask[2][1]*copyMatrix[i][j+1]+ mask[2][2]*copyMatrix[i+1][j+1];
+
+}//end doMediana
