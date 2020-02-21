@@ -1,0 +1,79 @@
+//SZKIELETOWANIE Z 28.11.19
+void Control::szkieletuj()
+{
+    bool puste = false;
+        float suma=0;
+        float sumaMatrix[100][100];         // suma
+        float roznicaMatrix[100][100];      // różnica
+        float openMatrix[100][100];         //po otwarciu
+        float orygMatrix[100][100];         //oryginalny
+
+//wszystkie matrixy białe i przypisanie obrazu do orygMatrix
+        for(int i = 0; i < rows_; i++) {
+            for(int j = 0; j < cols_; j++) {
+                   sumaMatrix[i][j]=0;
+                   roznicaMatrix[i][j]=0;
+                   openMatrix[i][j]=0;
+                   orygMatrix[i][j]=imgMatrix[i][j];
+            }
+        }
+
+    while(!puste){
+
+            for(int i = 0; i < rows_; i++) {
+                for(int j = 0; j < cols_; j++) {
+                   orygMatrix[i][j] = imgMatrix[i][j];
+                }
+            }
+
+            otwarcie(imgMatrix, mask4);     //operacja otwarcia
+
+            //zapisujemy obraz po operacji otwarcia do openMatrix
+            for(int i = 0; i < rows_; i++) {
+                for(int j = 0; j < cols_; j++) {
+                       openMatrix[i][j] = imgMatrix[i][j];
+                }
+            }
+
+            //roznica
+            for(int i = 0; i < rows_; i++) {
+                for(int j = 0; j < cols_; j++) {
+                       roznicaMatrix[i][j]=orygMatrix[i][j]-openMatrix[i][j];
+                       sumaMatrix[i][j] += roznicaMatrix[i][j];
+                       if(sumaMatrix[i][j] > 0)
+                           sumaMatrix[i][j]=255;
+                       else
+                           sumaMatrix[i][j]=0;
+                }
+            }
+
+            for(int i = 0; i < rows_; i++) {
+                for(int j = 0; j < cols_; j++) {
+                       imgMatrix[i][j] = orygMatrix[i][j];
+                }
+            }
+
+           erozja(imgMatrix,mask4);
+
+            suma = 0;
+
+            for(int i = 1; i < rows_-1; i++) {
+                for(int j = 1; j < cols_-1; j++) {
+                       suma += imgMatrix[i][j];
+                }
+            }
+
+            if (suma == 0)
+                puste = true;
+    }
+
+    for(int i = 0; i < rows_; i++) {
+        for(int j = 0; j < cols_; j++) {
+               imgMatrix[i][j] = sumaMatrix[i][j];
+               if(imgMatrix[i][j] > 0)
+                   imgMatrix[i][j]=255;
+               else
+                   imgMatrix[i][j]=0;
+        }
+    }
+}//end SZKIELETUJ
