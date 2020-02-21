@@ -1,0 +1,42 @@
+//DYLATACJA
+//MAGDALENA LIPIEC, 2019
+void Control::dylatacja(float **imgMatrix, int maska[3][3])
+{
+    int copyMatrix[100][100];
+    int suma;
+    bool doMorf;
+
+    for(int i = 0; i < 100; i++) {
+    for(int j = 0; j < 100; j++) {
+
+    copyMatrix[i][j] = imgMatrix[i][j];
+    }
+    }
+
+    for(int i = 1; i < 99; i++) {
+    for(int j = 1; j < 99; j++) {
+
+//        suma = 0;
+        doMorf = false;
+        for (int k = 0; k < 3; k++)
+        {
+            for (int l = 0; l < 3; l++)
+            {
+                if (maska[l][k] > 0){
+                    if (copyMatrix[i-1+k][j-1+l] > 0)
+                        doMorf = true;
+                }
+            }
+        }
+
+
+        if (doMorf)
+        {
+            imgMatrix[i][j] = 255;
+        }
+        else{
+            imgMatrix[i][j] = 0;
+        }
+    }
+    }
+}//end DYLATACJA
