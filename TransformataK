@@ -1,0 +1,52 @@
+int acc[180][285];    //akumulator
+int angle = 0, rho = 0;  //teta i ro
+int max = 0;    //do najwiekszej wartosci
+int y;
+int limit = 1000;
+
+for(int m = 1; m < 10; m++) {
+
+    //zerujemy akumulator
+    for(int i = 0; i < 180; i++) {
+    for(int j = 0; j < 285; j++) {
+
+    acc[i][j] =  0;
+    }
+    }
+
+    //znajdujemy pierwszy niezerowy punkt na obrazie
+    for(int x = 0; x < 99; x++) {
+    for(int y = 0; y < 99; y++) {
+
+    if(imgMatrix[x][99-y] > 128){
+        for(int teta = 0; teta < 180; teta++){
+            //wyliczamy ro i wpisujemy do akumulatora
+            //cos w radianach jest musimy zamienic na stopnie w ()
+            rho = (int) (x * cos(3.14/180 * teta) + y * sin(3.14/180 * teta) );
+            acc[teta][rho+142]++;
+        }
+
+    }//endIF
+    }//endFOR
+    }//endFOR
+
+//znalezenie wartosci max z akumulatora
+    for(int i = 0; i < 180; i++) {
+    for(int j = 0; j < 285; j++) {
+       if (acc[i][j] > max) {
+           max = acc[i][j];
+           rho = j - 142;
+           angle = i;
+       }//endIF
+    }
+    }
+
+//rysowanie y
+        for(int x = 0; x < 99; x++) {
+             y = (rho - x * cos((3.14/180) * angle)) / sin((3.14/180) * angle);
+
+             if( (y > 0) && (y <= 99) ) imgMatrix[x][99-y] = 100;
+                                    }
+
+
+}//for glowny
