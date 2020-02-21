@@ -1,0 +1,6 @@
+//MAGDALENA LIPIEC, 2019
+void Control::otwarcie(float **img, int mask[3][3])
+{
+    erozja(imgMatrix, mask4);
+    dylatacja(imgMatrix, mask4);
+}
