@@ -1,0 +1,66 @@
+float copyMatrix[100][100];
+int wzorzec1[8], wzorzec2[8];
+int licznik;
+int p0, p1, p2, p3, p4, p5, p6, p7, p8;
+
+    for(int i = 1; i < 99; i++) {
+    for(int j = 1; j < 99; j++) {
+
+        copyMatrix[i][j] = imgMatrix[i][j];
+        imgMatrix[i][j] = 0;
+
+        licznik = 0;
+        p0 = copyMatrix[i-1][j-1];
+        p1 = copyMatrix[i][j-1];
+        p2 = copyMatrix[i+1][j-1];
+        p8 = copyMatrix[i-1][j];
+        p4 = copyMatrix[i][j];
+        p3 = copyMatrix[i+1][j];
+        p7 = copyMatrix[i-1][j+1];
+        p6 = copyMatrix[i][j+1];
+        p5 = copyMatrix[i+1][j+1];
+
+        if(p0 >= p4)    wzorzec2[0] = 1;
+        else            wzorzec2[0] = 0;
+
+        if(p1 >= p4)    wzorzec2[1] = 1;
+        else            wzorzec2[1] = 0;
+
+        if(p2 >= p4)    wzorzec2[2] = 1;
+        else            wzorzec2[2] = 0;
+
+        if(p3 >= p4)    wzorzec2[3] = 1;
+        else            wzorzec2[3] = 0;
+
+        if(p5 >= p4)    wzorzec2[4] = 1;
+        else            wzorzec2[4] = 0;
+
+        if(p6 >= p4)    wzorzec2[5] = 1;
+        else            wzorzec2[5] = 0;
+
+        if(p7 >= p4)    wzorzec2[6] = 1;
+        else            wzorzec2[6] = 0;
+
+        if(p8 >= p4)    wzorzec2[7] = 1;
+        else            wzorzec2[7] = 0;
+
+        if(i == 1 && j == 1)
+            for(int k =0; k < 8; k++)
+            {
+                wzorzec1[k] = wzorzec2[k];
+            }
+
+        for(int k = 0; k < 8; k++)
+        {
+            if(wzorzec1[k] == wzorzec2[k])  licznik++;
+        }
+
+        if(licznik > 7)
+            for(int x = -1; x < 2; x++) {
+            for(int y = -1; y < 2; y++) {
+
+               imgMatrix[x+i][y+j] = copyMatrix[x+i][y+j];
+            }
+            }
+    }//for
+    }//for
