@@ -1,0 +1,47 @@
+void Control::doLab12() //05.12.19  Rozciąganie histogramu
+{
+    int copyMatrix[255][255];
+    int b[255];
+    int wartosc;
+    int max = 0;
+    int min = 255;
+
+    for(int i = 1; i < 99; i++) {
+    for(int j = 1; j < 99; j++) {
+
+        copyMatrix[i][j] = imgMatrix[i][j];
+    }
+    }
+
+    //najwieksza wartosc
+    for(int i = 1; i < 99; i++) {
+    for(int j = 1; j < 99; j++) {
+
+       if (imgMatrix[i][j] > max)
+       {
+           max = imgMatrix[i][j];
+
+       }
+    }
+    }
+    //najmniejsza wartosc
+    for(int i = 1; i < 99; i++) {
+    for(int j = 1; j < 99; j++) {
+
+       if (imgMatrix[i][j] < min)
+       {
+           min = imgMatrix[i][j];
+
+       }
+    }
+    }
+
+    for(int i = 1; i < 99; i++) {
+    for(int j = 1; j < 99; j++) {
+
+        wartosc = (imgMatrix[i][j] - min)*(255/(max - min));
+        imgMatrix[i][j] = wartosc;
+    }
+    }
+
+}//end doLab12
