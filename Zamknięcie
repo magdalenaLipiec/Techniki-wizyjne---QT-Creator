@@ -1,0 +1,9 @@
+//MAGDALENA LIPIEC, 2019
+
+//ZAMKNIECIE
+void Control::zamkniecie(float **img, int mask[3][3])
+{
+        dylatacja(imgMatrix, mask4);
+        erozja(imgMatrix, mask4);
+}
+//end ZAMKNIECIE
