@@ -1,0 +1,28 @@
+//filtr SOBEL
+void Control::doSobel(int mask[3][3]){
+    int suma;
+    int copyMatrix[100][100];
+    ////////////////////////////////////////////////////////////////
+
+    //int mask[3][3] = {{-1,0,1}, {-2,0,2}, {-1,0,1}};
+
+
+        for(int i = 0; i < 100; i++) {
+        for(int j = 0; j < 100; j++) {
+
+        copyMatrix[i][j] = imgMatrix[i][j];
+
+        }
+        }
+
+        for(int i = 1; i < 99; i++) {
+        for(int j = 1; j < 99; j++) {
+
+        suma = mask[0][0]*copyMatrix[i-1][j-1] + mask[0][1]*copyMatrix[i][j-1] +  mask[0][2]*copyMatrix[i+1][j-1] + mask[1][0]*copyMatrix[i-1][j]+ mask[1][1]*copyMatrix[i][j]+ mask[1][2]*copyMatrix[i+1][j]+ mask[2][0]*copyMatrix[i-1][j+1]+ mask[2][1]*copyMatrix[i][j+1]+ mask[2][2]*copyMatrix[i+1][j+1];
+        if(suma > 255)  suma = 255;
+
+            imgMatrix[i][j] = suma / 2;
+
+        }
+        }
+}//endSOBEL
